@@ -2,11 +2,11 @@
   <section id="group" class="py-24 md:py-32 bg-white overflow-hidden">
     <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
 
-      <div v-reveal class="flex justify-between items-end mb-12 md:mb-16">
-        <h2 class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
+      <div class="flex justify-between items-end mb-12 md:mb-16">
+        <h2 v-reveal-mask class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
           Group
         </h2>
-        <div class="hidden md:block mb-2">
+        <div v-reveal="150" class="hidden md:block mb-2">
           <BaseButtonArrow to="/company/#group">View More</BaseButtonArrow>
         </div>
       </div>

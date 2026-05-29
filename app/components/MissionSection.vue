@@ -12,7 +12,7 @@
 
       <div class="w-full md:w-[48%]">
         <h3
-          v-reveal="200"
+          v-reveal-mask="200"
           class="font-en font-bold tracking-tighter mb-5 md:mb-6 leading-[1.05] text-gray-dark text-[clamp(1.75rem,3.4vw,2.75rem)]"
         >
           <span class="block">Circular Design</span>

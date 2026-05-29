@@ -2,13 +2,12 @@
   <section id="vin" class="py-24 md:py-32 bg-white overflow-hidden">
     <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
 
-      <div v-reveal class="mb-16 md:mb-24">
-        <h2 class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
+      <div class="mb-16 md:mb-24">
+        <h2 v-reveal-mask class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
           Valuence in Numbers
         </h2>
-        <p class="font-ja text-[13px] md:text-[15px] text-gray-medium mt-6 md:mt-8 leading-[2] max-w-[640px]">
-          バリュエンスグループにまつわる数字をご紹介いたします。<br class="hidden md:block">
-          事業や働くひと、働く環境に関することが数字で理解いただけます。
+        <p v-reveal="150" class="font-ja text-[13px] md:text-[15px] text-gray-medium mt-6 md:mt-8 leading-[2] max-w-[640px]">
+          バリュエンスグループの事業、働く人や環境に関してのデータを数字でご覧いただけます。
         </p>
       </div>
 

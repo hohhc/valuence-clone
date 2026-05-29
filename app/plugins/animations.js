@@ -41,6 +41,55 @@ export default defineNuxtPlugin((nuxtApp) => {
     }
   })
 
+  // 見出しが行ごとにマスクの中からせり上がる (v-reveal-mask)
+  // 本家 txEffect 相当。直下の子要素を「行」とみなし、無ければ要素自身を1行として扱う
+  // 使い方: v-reveal-mask / v-reveal-mask="200"（200ms 遅延）
+  nuxtApp.vueApp.directive('reveal-mask', {
+    getSSRProps() {
+      return { class: 'opacity-0' }
+    },
+    mounted(el, binding) {
+      const baseDelay = (typeof binding.value === 'number' ? binding.value : 0) / 1000
+
+      let lines = Array.from(el.children).filter((n) => n.nodeType === 1)
+      if (lines.length === 0) {
+        const span = document.createElement('span')
+        while (el.firstChild) span.appendChild(el.firstChild)
+        el.appendChild(span)
+        lines = [span]
+      }
+
+      lines.forEach((line, i) => {
+        line.style.display = 'block'
+        line.style.overflow = 'hidden'
+        const inner = document.createElement('span')
+        inner.style.display = 'block'
+        inner.style.transform = 'translateY(110%)'
+        inner.style.transition = 'transform 1s cubic-bezier(0.16, 1, 0.3, 1)'
+        inner.style.transitionDelay = `${baseDelay + i * 0.12}s`
+        inner.style.willChange = 'transform'
+        while (line.firstChild) inner.appendChild(line.firstChild)
+        line.appendChild(inner)
+      })
+
+      el.style.opacity = '1'
+      el.classList.remove('opacity-0')
+
+      const { stop } = useIntersectionObserver(
+        el,
+        ([{ isIntersecting }]) => {
+          if (isIntersecting) {
+            lines.forEach((line) => {
+              line.firstChild.style.transform = 'translateY(0)'
+            })
+            stop()
+          }
+        },
+        { threshold: 0.2, rootMargin: '0px 0px -8% 0px' }
+      )
+    }
+  })
+
   // 数字が 0 からパラパラ増える (v-count-up)
   nuxtApp.vueApp.directive('count-up', {
     getSSRProps() {

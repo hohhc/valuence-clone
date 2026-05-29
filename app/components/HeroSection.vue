@@ -14,11 +14,19 @@
       >
         <SwiperSlide v-for="(img, index) in sliderImages" :key="index">
           <div class="relative w-full h-full">
-            <img
-              :src="img"
-              class="w-full h-full object-cover scale-[1.04] hero-slide-img"
-              alt="Valuence Hero Image"
-            />
+            <picture class="block w-full h-full">
+              <source :srcset="`${img}.webp`" media="(min-width: 769px)" type="image/webp" />
+              <source :srcset="`${img}.jpg`" media="(min-width: 769px)" />
+              <source :srcset="`${img}_sp.webp`" type="image/webp" />
+              <source :srcset="`${img}_sp.jpg`" />
+              <img
+                :src="`${img}.jpg`"
+                class="w-full h-full object-cover scale-[1.04] hero-slide-img"
+                alt="Valuence Hero Image"
+                width="1280"
+                height="750"
+              />
+            </picture>
             <div class="absolute inset-0 bg-black/40"></div>
           </div>
         </SwiperSlide>
@@ -36,8 +44,8 @@
               </div>
 
               <div class="text-right font-bold flex items-baseline">
-                <span class="text-3xl md:text-[40px] leading-none mr-1">{{ currentHour }}</span>
-                <span class="text-[15px] md:text-lg">:{{ currentMinute }} {{ currentAmPm }}</span>
+                <span class="text-[44px] md:text-[64px] leading-none mr-1 tracking-tight">{{ currentHour }}</span>
+                <span class="text-[18px] md:text-[22px]">:{{ currentMinute }} {{ currentAmPm }}</span>
               </div>
 
             </div>
@@ -48,7 +56,7 @@
 
     <div class="relative z-10 flex flex-col items-center justify-center h-full text-center px-6 pointer-events-none">
       <h2
-        v-reveal
+        v-reveal-mask
         class="font-en font-bold leading-[0.95] mb-8 md:mb-10 drop-shadow-lg text-[clamp(2.75rem,9vw,6.5rem)] tracking-[-0.04em]"
       >
         <span class="block">We are</span>
@@ -65,9 +73,10 @@
       <div v-reveal="400" class="pointer-events-auto">
         <NuxtLink
           to="/contact"
-          class="inline-flex items-center justify-center border border-white rounded-full w-[185px] py-[14px] font-en text-[11px] font-bold tracking-widest uppercase hover:bg-[#3CA96C] hover:border-[#3CA96C] transition-all duration-300 ease-out-quart"
+          class="group relative inline-flex items-center justify-center overflow-hidden border border-white rounded-full w-[185px] py-[14px] font-en text-[11px] font-bold tracking-widest uppercase transition-colors duration-500 ease-out-quart hover:border-[#3CA96C]"
         >
-          Contact
+          <span class="absolute inset-0 bg-[#3CA96C] translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out-quart rounded-full"></span>
+          <span class="relative z-10">Contact</span>
         </NuxtLink>
       </div>
     </div>
@@ -91,10 +100,11 @@ import 'swiper/css'
 import 'swiper/css/effect-fade'
 import 'swiper/css/pagination'
 
+// 拡張子なしのベースパス（.webp / .jpg / _sp.webp / _sp.jpg を出し分け）
 const sliderImages = [
-  'https://www.valuence.inc/wp-content/themes/valuence/assets/images/slider-home_01.jpg',
-  'https://www.valuence.inc/wp-content/themes/valuence/assets/images/slider-home_02.jpg',
-  'https://www.valuence.inc/wp-content/themes/valuence/assets/images/slider-home_03.jpg'
+  'https://www.valuence.inc/wp-content/themes/valuence/assets/images/slider-home_01',
+  'https://www.valuence.inc/wp-content/themes/valuence/assets/images/slider-home_02',
+  'https://www.valuence.inc/wp-content/themes/valuence/assets/images/slider-home_03'
 ]
 
 const time = ref(new Date())

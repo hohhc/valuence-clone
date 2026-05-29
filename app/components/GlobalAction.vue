@@ -2,11 +2,11 @@
   <section id="globalAction" class="py-24 md:py-32 bg-white border-t border-gray-100 overflow-hidden">
     <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
 
-      <div v-reveal class="mb-16 md:mb-20">
-        <h2 class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
+      <div class="mb-16 md:mb-20">
+        <h2 v-reveal-mask class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
           Global Action
         </h2>
-        <p class="font-ja text-[13px] md:text-[15px] leading-[2] text-gray-medium mt-6 md:mt-8 max-w-3xl">
+        <p v-reveal="150" class="font-ja text-[13px] md:text-[15px] leading-[2] text-gray-medium mt-6 md:mt-8 max-w-3xl">
           日本から世界へ、私たちの考えるリユースを伝えていきたい。<br>
           お客さま一人ひとりがさまざまなライフステージで大切なことにフォーカスしていける環境づくりを目指し、<br class="hidden md:block">
           グローバルで新しいチャレンジを続けてまいります。
@@ -44,10 +44,14 @@
             </dl>
           </div>
 
-          <!-- ピン本体（パルス + ドット） -->
+          <!-- ピン本体（パルス + 合計店舗数） -->
           <div class="relative flex items-center justify-center">
-            <span class="absolute inline-flex w-4 h-4 md:w-5 md:h-5 rounded-full bg-black/40 animate-pulse-dot"></span>
-            <span class="relative inline-flex w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-black group-hover:bg-[#3CA96C] transition-colors duration-300 ring-2 ring-white"></span>
+            <span class="absolute inline-flex w-7 h-7 md:w-9 md:h-9 rounded-full bg-black/20 animate-pulse-dot"></span>
+            <span
+              class="relative inline-flex items-center justify-center min-w-[22px] h-[22px] md:min-w-[26px] md:h-[26px] px-1.5 rounded-full bg-black group-hover:bg-[#3CA96C] transition-colors duration-300 ring-2 ring-white text-white font-en font-bold text-[10px] md:text-[11px] leading-none"
+            >
+              {{ total(loc) || '' }}
+            </span>
           </div>
         </div>
 
@@ -59,4 +63,7 @@
 
 <script setup>
 const { locations } = useLocations()
+
+// ピンに表示する合計店舗数（ALLU + NANBOYA + Others）
+const total = (loc) => (loc.allu || 0) + (loc.nanboya || 0) + (loc.others || 0)
 </script>

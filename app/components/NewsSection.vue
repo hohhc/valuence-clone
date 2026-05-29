@@ -2,11 +2,11 @@
   <section id="news" class="py-24 md:py-32 bg-white overflow-hidden">
     <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
 
-      <div v-reveal class="flex justify-between items-end mb-12 md:mb-16">
-        <h2 class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
+      <div class="flex justify-between items-end mb-12 md:mb-16">
+        <h2 v-reveal-mask class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">
           News
         </h2>
-        <div class="hidden md:block mb-2">
+        <div v-reveal="150" class="hidden md:block mb-2">
            <BaseButtonArrow to="/news/news-pickup/">View More</BaseButtonArrow>
         </div>
       </div>
@@ -55,28 +55,28 @@
 </template>
 
 <script setup>
-// 公式トップの 2026.05 最新ラインナップ
+// 公式トップの最新ラインナップ（2026.05.29 時点）
 const newsItems = [
   {
-    title: 'バリュエンス、『キャプテン翼』IPを活用した、MLSカップ6度の優勝を誇る「LA Galaxy」とコラボレーションが決定！',
+    title: '【5月】「HATTRICK」プレスリリース配信情報',
     category: 'プレスリリース',
-    date: '2026.05.22',
-    img: 'https://www.valuence.inc/wp-content/uploads/2026/05/captain-tsubasa-la-galaxy.jpg',
-    url: '/news/2026/05/22/la-galaxy/'
+    date: '2026.05.29',
+    img: 'https://www.valuence.inc/wp-content/themes/valuence/assets/images/img_11.jpg',
+    url: '/news/news-pickup/'
   },
   {
-    title: 'なんぼや 中央林間東急スクエア店が5月27日（水）にオープン！',
+    title: 'インドネシアでブランド買取「ALLU Surabaya Telkom Merr Landmark」をオープン！',
     category: 'お知らせ',
-    date: '2026.05.20',
-    img: 'https://www.valuence.inc/wp-content/uploads/2026/05/nanboya-chuorinkan.jpg',
-    url: '/news/2026/05/20/nanboya-chuorinkan/'
+    date: '2026.05.29',
+    img: 'https://www.valuence.inc/wp-content/themes/valuence/assets/images/img_05.jpg',
+    url: '/news/news-pickup/'
   },
   {
-    title: 'Valuence INFINITIES、26-27 SEASON 新メンバーオーディションを開催！',
+    title: 'バリュエンス、フランスにてブランド買取「ALLU Boulogne-Billancourt」をオープン！',
     category: 'プレスリリース',
-    date: '2026.05.18',
-    img: 'https://www.valuence.inc/wp-content/uploads/2026/05/infinities-audition.jpg',
-    url: '/news/2026/05/18/infinities-audition/'
+    date: '2026.05.26',
+    img: 'https://www.valuence.inc/wp-content/themes/valuence/assets/images/img_40.jpg',
+    url: '/news/news-pickup/'
   }
 ]
 </script>

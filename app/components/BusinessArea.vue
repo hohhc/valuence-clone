@@ -3,9 +3,9 @@
     <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20">
 
       <div class="flex flex-col md:flex-row md:justify-between items-start mb-20 md:mb-32 gap-10">
-        <div v-reveal class="w-full md:w-2/5">
-          <h2 class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">Business</h2>
-          <p class="font-ja text-[13px] md:text-[15px] leading-[2] text-gray-medium mt-6 md:mt-8 max-w-[420px]">
+        <div class="w-full md:w-2/5">
+          <h2 v-reveal-mask class="font-en font-bold tracking-tightest leading-[0.95] text-[clamp(2.5rem,7vw,5.5rem)]">Business</h2>
+          <p v-reveal="150" class="font-ja text-[13px] md:text-[15px] leading-[2] text-gray-medium mt-6 md:mt-8 max-w-[420px]">
             リユースという言葉を、世の中のあたりまえに。<br class="hidden md:block">
             そして、一人ひとりが大切なことにフォーカスしていける環境づくりを目指して。
           </p>

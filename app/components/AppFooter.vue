@@ -1,44 +1,85 @@
 <template>
-  <footer class="bg-white text-black pt-20 md:pt-24 pb-10 px-6 md:px-12 lg:px-20 border-t border-gray-border">
+  <footer class="bg-white text-black pt-20 md:pt-24 pb-10 px-6 md:px-12 lg:px-20 border-t border-gray-200">
     <div class="max-w-[1400px] mx-auto">
 
-      <div class="flex flex-col lg:flex-row justify-between mb-16 md:mb-20 gap-12 md:gap-16">
+      <div class="flex flex-col lg:flex-row justify-between mb-12 md:mb-20 gap-10 lg:gap-16">
 
-        <div class="lg:w-1/4">
+        <div class="lg:w-1/5 shrink-0">
           <NuxtLink to="/" class="font-en font-bold text-[28px] md:text-[32px] tracking-[0.15em] uppercase hover:opacity-70 transition-opacity">
             Valuence
           </NuxtLink>
         </div>
 
-        <div class="w-full lg:w-3/4 grid grid-cols-2 md:grid-cols-4 gap-y-10 md:gap-y-12 gap-x-6 md:gap-x-8">
-          <div v-for="menu in megaMenus" :key="menu.en" class="flex flex-col">
-            <NuxtLink :to="menu.path" class="font-en text-[12px] md:text-[13px] font-bold tracking-widest uppercase mb-4 hover:text-gray-medium transition-colors">
-              {{ menu.en }}
-            </NuxtLink>
-            <ul class="flex flex-col gap-3">
-              <li v-for="item in menu.items.slice(0, 7)" :key="item.name">
-                <NuxtLink :to="item.path" class="font-ja text-[11px] text-gray-medium hover:text-black transition-colors">
-                  {{ item.name }}
+        <!-- サイトマップ：PC = 多段グリッド / SP = アコーディオン -->
+        <nav class="w-full lg:w-4/5">
+          <ul class="flex flex-col md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-x-8 md:gap-y-12">
+            <li
+              v-for="(menu, i) in megaMenus"
+              :key="menu.en"
+              class="border-b border-gray-200 md:border-b-0"
+            >
+              <!-- 見出し行：タイトルはリンク / アイコンは SP のみアコーディオン開閉 -->
+              <div class="flex items-center justify-between py-4 md:py-0 md:mb-4">
+                <NuxtLink
+                  :to="menu.path"
+                  class="font-en text-[13px] font-bold tracking-widest uppercase hover:text-gray-medium transition-colors"
+                >
+                  {{ menu.en }}
                 </NuxtLink>
-              </li>
-            </ul>
-          </div>
-        </div>
+                <button
+                  type="button"
+                  class="relative w-5 h-5 md:hidden shrink-0"
+                  :aria-expanded="isOpen(i)"
+                  :aria-label="`${menu.en} を開閉`"
+                  @click="toggle(i)"
+                >
+                  <span class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-[1.5px] bg-black"></span>
+                  <span
+                    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-[1.5px] bg-black transition-transform duration-300 ease-out-quart"
+                    :class="isOpen(i) ? 'rotate-0' : 'rotate-90'"
+                  ></span>
+                </button>
+              </div>
+
+              <!-- 中身：SP は grid-rows トリックでアニメ開閉 / PC は常時表示 -->
+              <div
+                class="grid transition-all duration-300 ease-out-quart md:!grid-rows-[1fr] md:!opacity-100"
+                :class="isOpen(i) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+              >
+                <div class="overflow-hidden">
+                  <ul class="flex flex-col gap-3 pb-5 md:pb-0">
+                    <li v-for="item in menu.items" :key="item.name">
+                      <NuxtLink
+                        :to="item.path"
+                        class="font-ja text-[12px] text-gray-medium hover:text-black transition-colors"
+                      >
+                        {{ item.name }}
+                      </NuxtLink>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </nav>
       </div>
 
-      <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+      <!-- 下段ライン -->
+      <div class="border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
 
         <div class="flex items-center gap-6">
           <img
             src="https://www.valuence.inc/wp-content/themes/valuence/assets/images/foot-mark_01.svg"
             class="w-7 h-7"
-            alt="Sponsor"
+            alt="Valuence"
+            loading="lazy"
           />
           <a href="https://www.nankatsu-sc.com/" target="_blank" rel="noopener" aria-label="Nankatsu SC">
             <img
               src="https://www.valuence.inc/wp-content/themes/valuence/assets/images/foot-mark_03.svg"
               class="w-7 h-7 hover:opacity-70 transition-opacity"
               alt="Nankatsu SC"
+              loading="lazy"
             />
           </a>
           <a
@@ -71,5 +112,15 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 const { megaMenus, legalLinks } = useNavigation()
+
+const openSet = ref(new Set())
+const isOpen = (i) => openSet.value.has(i)
+const toggle = (i) => {
+  const next = new Set(openSet.value)
+  next.has(i) ? next.delete(i) : next.add(i)
+  openSet.value = next
+}
 </script>

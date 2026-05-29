@@ -12,7 +12,7 @@
 
     <div class="relative z-10 text-center flex flex-col items-center px-4 w-full">
       <h2
-        v-reveal
+        v-reveal-mask
         class="font-en font-bold tracking-tightest leading-[0.95] mb-8 md:mb-10 drop-shadow-md text-[clamp(3rem,8vw,6rem)]"
       >
         Recruit
@@ -28,10 +28,11 @@
       <div v-reveal="400">
         <NuxtLink
           to="/recruit"
-          class="group flex items-center gap-4 border border-white rounded-full pl-8 pr-6 py-[14px] font-en text-[11px] font-bold uppercase tracking-widest hover:bg-white hover:text-black transition-all duration-300 ease-out-quart"
+          class="group relative flex items-center gap-4 overflow-hidden border border-white rounded-full pl-8 pr-6 py-[14px] font-en text-[11px] font-bold uppercase tracking-widest transition-colors duration-500 ease-out-quart hover:text-black"
         >
-          <span>View More</span>
-          <span class="relative inline-block h-[1px] w-8 group-hover:w-12 transition-all duration-300 ease-out-quart">
+          <span class="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out-quart rounded-full"></span>
+          <span class="relative z-10">View More</span>
+          <span class="relative z-10 inline-block h-[1px] w-8 group-hover:w-12 transition-all duration-300 ease-out-quart">
             <span class="absolute inset-0 bg-white group-hover:bg-black transition-colors duration-300"></span>
             <span class="absolute right-0 top-0 w-[8px] h-[1px] bg-white group-hover:bg-black origin-right rotate-45 transition-colors duration-300"></span>
             <span class="absolute right-0 top-0 w-[8px] h-[1px] bg-white group-hover:bg-black origin-right -rotate-45 transition-colors duration-300"></span>
