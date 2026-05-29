@@ -1,0 +1,112 @@
+/**
+ * ニュース記事（公式 /news/ より・最新ラインナップ）
+ * category: 'プレスリリース' | 'お知らせ' | 'メディア掲載'
+ */
+export const useNews = () => {
+  const U = 'https://www.valuence.inc/wp-content/uploads'
+  const A = 'https://www.valuence.inc/news'
+
+  const newsItems = [
+    {
+      date: '2026.05.29', category: 'プレスリリース',
+      title: '【5月】「HATTRICK」プレスリリース配信情報',
+      img: `${U}/2025/03/20250227_release_thumbnail_HATTRICK-1080x720.jpg`,
+      url: `${A}/2026/05/29/ht_may_2026/`,
+      tags: ['HATTRICK', 'バリュエンスジャパン']
+    },
+    {
+      date: '2026.05.29', category: 'お知らせ',
+      title: 'インドネシアでブランド買取「ALLU Surabaya Telkom Merr Landmark」をオープン！',
+      img: `${U}/2026/05/c42b0dbe56f98074624bebd53a46169e.png`,
+      url: `${A}/2026/05/29/allu-surabaya-telkom-merr-landmark/`,
+      tags: ['ALLU Hong Kong Limited', 'ブランド買取「ALLU」']
+    },
+    {
+      date: '2026.05.29', category: 'お知らせ',
+      title: 'インドネシアでブランド買取「ALLU Surabaya Tunjungan Plaza」を移転・リニューアルオープン！',
+      img: `${U}/2026/05/3bb4ecde33cee9b922fafa294b418d2f.png`,
+      url: `${A}/2026/05/29/allu-surabaya-tunjungan-plaza/`,
+      tags: ['ALLU Hong Kong Limited', 'ブランド買取「ALLU」']
+    },
+    {
+      date: '2026.05.26', category: 'プレスリリース',
+      title: 'バリュエンス、フランスにてブランド買取「ALLU Boulogne-Billancourt」をオープン！',
+      img: `${U}/2026/05/TOP.png`,
+      url: `${A}/2026/05/26/allu-boulogne-billancourt/`,
+      tags: ['ALLU Europe S.A.S.', 'ALLU Hong Kong Limited']
+    },
+    {
+      date: '2026.05.22', category: 'プレスリリース',
+      title: 'バリュエンス、『キャプテン翼』IPを活用した、MLSカップ6度の優勝を誇る「LA Galaxy」とコラボレーションが決定！',
+      img: `${U}/2026/05/LA-Galaxy-TOP.jpg`,
+      url: `${A}/2026/05/22/captain-tsubasa_la-galaxy/`,
+      tags: ['バリュエンスジャパン']
+    },
+    {
+      date: '2026.05.20', category: 'お知らせ',
+      title: 'なんぼや 中央林間東急スクエア店が5月27日（水）にオープン！',
+      img: `${U}/2026/05/nanboyachuorinan-tokyu.png`,
+      url: `${A}/2026/05/20/nanboya-chuorinkan-tokyu/`,
+      tags: ['なんぼや']
+    },
+    {
+      date: '2026.05.18', category: 'プレスリリース',
+      title: 'Valuence INFINITIES、26-27 SEASON 新メンバーオーディションを開催！',
+      img: 'https://www.valuence.inc/wp-content/themes/valuence/assets/images/img_12.jpg',
+      url: `${A}/2026/05/18/valuence-infinities_26-27-season-new-member-auditions/`,
+      tags: ['Valuence INFINITIES']
+    },
+    {
+      date: '2026.05.18', category: 'お知らせ',
+      title: 'フィリピンにブランド買取「ALLU Cebucity」をオープン！',
+      img: `${U}/2026/05/a93c376ffcebf089e5ed7d4f7985d8ec.png`,
+      url: `${A}/2026/05/18/allu-cebucity/`,
+      tags: ['ALLU Hong Kong Limited', 'ブランド買取「ALLU」']
+    },
+    {
+      date: '2026.05.18', category: 'プレスリリース',
+      title: 'バリュエンス、「ＪリーグオールスターDAZNカップ」のシルバーパートナーに就任！',
+      img: `${U}/2026/05/d62443522355bdd24225fd339926e888.jpg`,
+      url: `${A}/2026/05/18/jleagueallstar_dazncup/`,
+      tags: ['バリュエンスジャパン']
+    },
+    {
+      date: '2026.05.12', category: 'プレスリリース',
+      title: 'バリュエンス、BtoBオークション向け決済サービス「Auction Pay」をペンギントレードへ提供開始',
+      img: `${U}/2026/05/e25b18710acf8d112c78138cfc0abc41.jpg`,
+      url: `${A}/2026/05/12/auction-pay-penguintrade/`,
+      tags: ['STAR BUYERS AUCTION']
+    },
+    {
+      date: '2026.05.01', category: 'プレスリリース',
+      title: '明石家さんまさんが出演する新CMを5月4日より全国放映 「さんまさん初ご来店」篇・「笑顔の査定室」篇を公開',
+      img: `${U}/2026/04/d1bdc4040d0f50f7900599e47799e0af.png`,
+      url: `${A}/2026/05/01/nanboya-cm_sanmasan/`,
+      tags: ['なんぼや']
+    },
+    {
+      date: '2026.04.16', category: 'プレスリリース',
+      title: 'バリュエンス、イタリア初のブランド買取「ALLU Milano」をオープン！',
+      img: `${U}/2026/04/TOP-2.png`,
+      url: `${A}/2026/04/16/allu-milano/`,
+      tags: ['ALLU Hong Kong Limited', 'ブランド買取「ALLU」']
+    }
+  ]
+
+  const categories = [
+    { label: 'All',          value: 'all',          path: '/news' },
+    { label: 'プレスリリース', value: 'プレスリリース', path: '/news/category/news' },
+    { label: 'お知らせ',       value: 'お知らせ',       path: '/news/category/notice' },
+    { label: 'メディア掲載',   value: 'メディア掲載',   path: '/news/category/media' }
+  ]
+
+  const tagList = [
+    'なんぼや', 'ブランド買取「ALLU」', 'プレオウンド・ブランドショップ「ALLU」',
+    'STAR BUYERS AUCTION', 'ALLU AUCTION', 'HATTRICK', 'Valuence INFINITIES',
+    'Valuence AUTOMOTIVE', 'helpmeee! KEIKO', '修理工房なんぼや',
+    'バリュエンスジャパン', 'バリュエンスホールディングス', 'バリュエンステクノロジーズ',
+    'ALLU Hong Kong Limited', 'ALLU Europe S.A.S.'
+  ]
+
+  return { newsItems, categories, tagList }
+}
