@@ -33,19 +33,16 @@
 
         <template #container-end>
           <div class="absolute bottom-0 left-0 w-full z-10 pb-8 md:pb-12 pointer-events-none">
-            <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex justify-between items-end font-en tracking-widest uppercase text-[10px] md:text-[11px]">
+            <div class="max-w-[1400px] mx-auto px-6 md:px-12 lg:px-20 flex items-end font-en tracking-widest uppercase">
 
-              <div class="text-left leading-relaxed">
+              <div class="shrink-0 text-left leading-relaxed text-[10px] md:text-[11px]">
                 <p>{{ currentDay }}<br>{{ currentDate }}</p>
               </div>
 
-              <div class="flex gap-3 pb-1">
-                <div class="swiper-pagination-custom swiper-pagination-clickable swiper-pagination-bullets swiper-pagination-horizontal flex gap-3 pointer-events-auto"></div>
-              </div>
+              <div class="swiper-pagination-custom flex-1 mx-6 md:mx-10 mb-[5px] flex items-center gap-1.5 pointer-events-auto"></div>
 
-              <div class="text-right font-bold flex items-baseline">
-                <span class="text-[44px] md:text-[64px] leading-none mr-1 tracking-tight">{{ currentHour }}</span>
-                <span class="text-[18px] md:text-[22px]">:{{ currentMinute }} {{ currentAmPm }}</span>
+              <div class="shrink-0 font-bold text-[12px] md:text-[14px] tracking-wider">
+                {{ currentHour }}:{{ currentMinute }} {{ currentAmPm }}
               </div>
 
             </div>
@@ -139,18 +136,21 @@ const currentAmPm = computed(() => time.value.getHours() >= 12 ? 'PM' : 'AM')
 </script>
 
 <style>
+.swiper-pagination-custom {
+  width: 100%;
+}
 .swiper-pagination-custom .swiper-pagination-bullet {
-  width: 8px;
-  height: 8px;
+  flex: 1 1 0;
+  height: 1px;
   background: #fff;
   opacity: 0.3;
   margin: 0 !important;
-  border-radius: 50%;
-  transition: opacity 0.3s ease, transform 0.3s ease;
+  border-radius: 9999px;
+  transition: opacity 0.5s ease, height 0.5s ease;
 }
 .swiper-pagination-custom .swiper-pagination-bullet-active {
   opacity: 1;
-  transform: scale(1.1);
+  height: 2px;
 }
 /* 緩やかな Ken Burns 風ズームアウト */
 .hero-slide-img {

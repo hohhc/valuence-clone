@@ -19,7 +19,7 @@
               class="border-b border-gray-200 md:border-b-0"
             >
               <!-- 見出し行：タイトルはリンク / アイコンは SP のみアコーディオン開閉 -->
-              <div class="flex items-center justify-between py-4 md:py-0 md:mb-4">
+              <div class="flex items-center justify-between py-4 md:py-0 md:mb-3">
                 <NuxtLink
                   :to="menu.path"
                   class="font-en text-[13px] font-bold tracking-widest uppercase hover:text-gray-medium transition-colors"
@@ -47,11 +47,11 @@
                 :class="isOpen(i) ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
               >
                 <div class="overflow-hidden">
-                  <ul class="flex flex-col gap-3 pb-5 md:pb-0">
+                  <ul class="flex flex-col pb-5 md:pb-0">
                     <li v-for="item in menu.items" :key="item.name">
                       <NuxtLink
                         :to="item.path"
-                        class="font-ja text-[12px] text-gray-medium hover:text-black transition-colors"
+                        class="block font-ja text-[12px] leading-[2.1] text-gray-medium hover:text-black transition-colors"
                       >
                         {{ item.name }}
                       </NuxtLink>
