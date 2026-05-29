@@ -6,7 +6,7 @@
       :breadcrumb="[{ label: 'News' }]"
     />
     <PageSection bg="white">
-      <NewsArchive category="all" heading="All" />
+      <NewsArchive category="all" heading="All" :page="1" :per-page="8" page-base="/news" />
     </PageSection>
   </div>
 </template>

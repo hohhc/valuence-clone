@@ -1,33 +1,6 @@
 <template>
   <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
-    <!-- サイドバー：カテゴリ + タグ -->
-    <aside class="w-full lg:w-1/4 shrink-0 order-1 lg:order-none">
-      <div class="lg:sticky lg:top-28">
-        <h2 class="font-en text-[20px] font-bold tracking-wider mb-5">Category</h2>
-        <ul class="flex flex-row flex-wrap lg:flex-col gap-x-4 gap-y-2 border-b lg:border-b-0 border-gray-200 pb-5 lg:pb-0">
-          <li v-for="cat in categories" :key="cat.value">
-            <NuxtLink
-              :to="cat.path"
-              class="font-ja text-[13px] transition-colors lg:py-1.5 lg:block"
-              :class="cat.value === category ? 'text-black font-bold' : 'text-gray-medium hover:text-black'"
-            >
-              {{ cat.label }}
-            </NuxtLink>
-          </li>
-        </ul>
-
-        <div class="mt-10 hidden lg:block">
-          <h2 class="font-en text-[20px] font-bold tracking-wider mb-5">Tag List</h2>
-          <ul class="flex flex-wrap gap-2">
-            <li v-for="tag in tagList" :key="tag">
-              <span class="inline-block font-ja text-[11px] text-gray-medium border border-gray-200 rounded-full px-3 py-1 hover:border-black hover:text-black transition-colors cursor-default">
-                {{ tag }}
-              </span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </aside>
+    <NewsSidebar :category="category" :active-tag="activeTag" />
 
     <!-- 記事リスト -->
     <div class="w-full lg:w-3/4">
@@ -37,12 +10,12 @@
 
       <div class="flex flex-col">
         <article
-          v-for="item in filteredNews"
-          :key="item.url + item.title"
+          v-for="item in displayed"
+          :key="item.slug"
           v-reveal
           class="group border-b border-gray-200 first:border-t py-7 md:py-8"
         >
-          <a :href="item.url" target="_blank" rel="noopener" class="flex flex-col md:flex-row gap-5 md:gap-8">
+          <NuxtLink :to="item.path" class="flex flex-col md:flex-row gap-5 md:gap-8">
             <div class="w-full md:w-[300px] shrink-0 aspect-[16/10] overflow-hidden bg-gray-100">
               <img
                 :src="item.img"
@@ -66,13 +39,34 @@
                 </li>
               </ul>
             </div>
-          </a>
+          </NuxtLink>
         </article>
       </div>
 
-      <p v-if="filteredNews.length === 0" class="font-ja text-[13px] text-gray-medium py-16 text-center">
+      <p v-if="displayed.length === 0" class="font-ja text-[13px] text-gray-medium py-16 text-center">
         該当するニュースはありません。
       </p>
+
+      <!-- ページネーション -->
+      <nav v-if="pageBase && totalPages > 1" class="flex items-center justify-center gap-2 mt-12 md:mt-16" aria-label="ページ送り">
+        <NuxtLink
+          v-if="currentPage > 1"
+          :to="pageLink(currentPage - 1)"
+          class="font-en text-[12px] px-4 py-2 border border-gray-200 hover:border-black transition-colors"
+        >Prev</NuxtLink>
+        <NuxtLink
+          v-for="n in totalPages"
+          :key="n"
+          :to="pageLink(n)"
+          class="font-en text-[12px] w-10 h-10 flex items-center justify-center border transition-colors"
+          :class="n === currentPage ? 'border-black bg-black text-white' : 'border-gray-200 hover:border-black'"
+        >{{ n }}</NuxtLink>
+        <NuxtLink
+          v-if="currentPage < totalPages"
+          :to="pageLink(currentPage + 1)"
+          class="font-en text-[12px] px-4 py-2 border border-gray-200 hover:border-black transition-colors"
+        >Next</NuxtLink>
+      </nav>
     </div>
   </div>
 </template>
@@ -81,16 +75,36 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  // 'all' | 'プレスリリース' | 'お知らせ' | 'メディア掲載' | 'pickup'
-  category: { type: String, default: 'all' },
-  heading:  { type: String, default: 'All' }
+  // 明示リストを渡す場合（タグ別など）
+  list:      { type: Array,  default: null },
+  // list 未指定時のカテゴリ絞り込み 'all' | 'プレスリリース' | ...
+  category:  { type: String, default: 'all' },
+  heading:   { type: String, default: 'All' },
+  page:      { type: Number, default: 1 },
+  perPage:   { type: Number, default: 8 },
+  // 指定するとページネーション有効（例 '/news'）
+  pageBase:  { type: String, default: '' },
+  // サイドバーでハイライトするタグ
+  activeTag: { type: String, default: '' }
 })
 
-const { newsItems, categories, tagList } = useNews()
+const { newsItems, paginate } = useNews()
 
-const filteredNews = computed(() =>
-  props.category === 'all' || props.category === 'pickup'
-    ? newsItems
-    : newsItems.filter((n) => n.category === props.category)
+const sourceList = computed(() => {
+  if (props.list) return props.list
+  if (props.category === 'all' || props.category === 'pickup') return newsItems
+  return newsItems.filter((n) => n.category === props.category)
+})
+
+const paged = computed(() =>
+  props.pageBase
+    ? paginate(sourceList.value, props.page, props.perPage)
+    : { items: sourceList.value, totalPages: 1, page: 1 }
 )
+
+const displayed = computed(() => paged.value.items)
+const totalPages = computed(() => paged.value.totalPages)
+const currentPage = computed(() => paged.value.page)
+
+const pageLink = (n) => (n === 1 ? props.pageBase : `${props.pageBase}/page/${n}`)
 </script>
