@@ -1,16 +1,16 @@
 <template>
-  <PageStub
-    en-title="Media"
-    ja-title="メディア掲載"
-    description="バリュエンスホールディングスが掲載されたメディア情報一覧です。"
-    :breadcrumb="[
-      { label: 'News', path: '/news' },
-      { label: 'Media' }
-    ]"
-    official-path="/news/category/media/"
-  />
+  <div>
+    <PageHero
+      title="News"
+      subtitle="メディア掲載"
+      :breadcrumb="[{ label: 'News', path: '/news' }, { label: 'メディア掲載' }]"
+    />
+    <PageSection bg="white">
+      <NewsArchive category="メディア掲載" heading="Media" />
+    </PageSection>
+  </div>
 </template>
 
 <script setup>
-useHead({ title: 'メディア掲載 | Valuence Holdings' })
+useHead({ title: 'メディア掲載 | News | Valuence Holdings' })
 </script>

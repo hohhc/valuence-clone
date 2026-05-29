@@ -1,13 +1,16 @@
 <template>
-  <PageStub
-    en-title="News Pickup"
-    ja-title="注目ニュース"
-    description="バリュエンスホールディングスの注目すべきトピックを厳選してご紹介します。"
-    :breadcrumb="[{ label: 'News', path: '/news' }, { label: 'Pickup' }]"
-    official-path="/news/news-pickup/"
-  />
+  <div>
+    <PageHero
+      title="Pick Up"
+      subtitle="ニュースピックアップ"
+      :breadcrumb="[{ label: 'News', path: '/news' }, { label: 'Pick Up' }]"
+    />
+    <PageSection bg="white">
+      <NewsArchive category="pickup" heading="Pick Up" />
+    </PageSection>
+  </div>
 </template>
 
 <script setup>
-useHead({ title: 'News Pickup | Valuence Holdings' })
+useHead({ title: 'Pick Up | News | Valuence Holdings' })
 </script>

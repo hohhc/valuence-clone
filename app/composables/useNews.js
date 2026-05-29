@@ -90,6 +90,34 @@ export const useNews = () => {
       img: `${U}/2026/04/TOP-2.png`,
       url: `${A}/2026/04/16/allu-milano/`,
       tags: ['ALLU Hong Kong Limited', 'ブランド買取「ALLU」']
+    },
+    {
+      date: '2026.04.15', category: 'お知らせ',
+      title: 'なんぼや 名古屋サカエチカ店が4月20日（月）にオープン！',
+      img: `${U}/2026/04/TOP-1.png`,
+      url: `${A}/2026/04/15/nagoya-sakaechika/`,
+      tags: ['なんぼや']
+    },
+    {
+      date: '2026.04.14', category: 'プレスリリース',
+      title: '食のこだわりから、モノの循環へ 産直通販サイト「食べチョク」と「なんぼや 宅配買取」が連携し、サステナブルな消費行動を広げる',
+      img: `${U}/2026/04/638e2c75b6fad80da201aba2fcc399c5.png`,
+      url: `${A}/2026/04/14/vivid-garden/`,
+      tags: ['なんぼや']
+    },
+    {
+      date: '2026.04.10', category: 'メディア掲載',
+      title: 'バリュエンス、ブランドリセールの環境価値を可視化「Resale Impact」の算定方法を更新、2025年度実績も開示',
+      img: `${U}/2026/04/d1bdc4040d0f50f7900599e47799e0af.png`,
+      url: `${A}/2026/04/10/resale-impact-2025/`,
+      tags: ['バリュエンスホールディングス']
+    },
+    {
+      date: '2026.03.18', category: 'メディア掲載',
+      title: '代表 嵜本晋輔のインタビュー記事が各種メディアに掲載されました',
+      img: 'https://www.valuence.inc/wp-content/themes/valuence/assets/images/img_58.jpg',
+      url: `${A}/`,
+      tags: ['バリュエンスホールディングス']
     }
   ]
 
