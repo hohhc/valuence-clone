@@ -138,11 +138,30 @@ export const useNews = () => {
     'ALLU Hong Kong Limited', 'ALLU Europe S.A.S.'
   ]
 
+  // 本家と同じ年レンジ（2016〜本年）を降順で
+  const archiveYears = (() => {
+    const years = []
+    for (let y = 2026; y >= 2016; y--) years.push(String(y))
+    return years
+  })()
+
   // ---- ヘルパー ----
   const getArticle = (year, month, day, slug) =>
     newsItems.find((n) => n.year === year && n.month === month && n.day === day && n.slug === slug)
 
   const getByTag = (tag) => newsItems.filter((n) => n.tags.includes(tag))
+
+  const getByYear = (year) => newsItems.filter((n) => n.year === String(year))
+
+  const search = (query) => {
+    const q = (query || '').trim().toLowerCase()
+    if (!q) return []
+    return newsItems.filter((n) =>
+      n.title.toLowerCase().includes(q) ||
+      n.tags.some((t) => t.toLowerCase().includes(q)) ||
+      (n.body || '').toLowerCase().includes(q)
+    )
+  }
 
   // 詳細ページの Prev(古い)/Next(新しい) を返す（配列は新しい順）
   const getAdjacent = (slug) => {
@@ -161,5 +180,5 @@ export const useNews = () => {
     return { items: list.slice(start, start + perPage), totalPages, page: current, total }
   }
 
-  return { newsItems, categories, tagList, getArticle, getByTag, getAdjacent, paginate }
+  return { newsItems, categories, tagList, archiveYears, getArticle, getByTag, getByYear, search, getAdjacent, paginate }
 }

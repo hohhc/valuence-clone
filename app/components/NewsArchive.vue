@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col lg:flex-row gap-12 lg:gap-16">
-    <NewsSidebar :category="category" :active-tag="activeTag" />
+    <NewsSidebar :category="category" :active-tag="activeTag" :active-year="activeYear" />
 
     <!-- 記事リスト -->
     <div class="w-full lg:w-3/4">
@@ -12,7 +12,6 @@
         <article
           v-for="item in displayed"
           :key="item.slug"
-          v-reveal
           class="group border-b border-gray-200 first:border-t py-7 md:py-8"
         >
           <NuxtLink :to="item.path" class="flex flex-col md:flex-row gap-5 md:gap-8">
@@ -47,25 +46,35 @@
         該当するニュースはありません。
       </p>
 
-      <!-- ページネーション -->
-      <nav v-if="pageBase && totalPages > 1" class="flex items-center justify-center gap-2 mt-12 md:mt-16" aria-label="ページ送り">
+      <!-- ページネーション（本家準拠：番号 + 省略記号 + Prev/Next） -->
+      <nav v-if="pageBase && totalPages > 1" class="flex items-center justify-center gap-5 md:gap-6 mt-14 md:mt-20" aria-label="ページ送り">
         <NuxtLink
           v-if="currentPage > 1"
           :to="pageLink(currentPage - 1)"
-          class="font-en text-[12px] px-4 py-2 border border-gray-200 hover:border-black transition-colors"
-        >Prev</NuxtLink>
-        <NuxtLink
-          v-for="n in totalPages"
-          :key="n"
-          :to="pageLink(n)"
-          class="font-en text-[12px] w-10 h-10 flex items-center justify-center border transition-colors"
-          :class="n === currentPage ? 'border-black bg-black text-white' : 'border-gray-200 hover:border-black'"
-        >{{ n }}</NuxtLink>
+          class="group inline-flex items-center gap-1.5 font-en text-[12px] tracking-widest uppercase hover:text-gray-medium transition-colors"
+        >
+          <span class="transition-transform group-hover:-translate-x-1">←</span> Prev
+        </NuxtLink>
+
+        <ul class="flex items-center gap-3 md:gap-4">
+          <li v-for="(p, i) in pageList" :key="i">
+            <span v-if="p === 'dots'" class="font-en text-[13px] text-gray-400">…</span>
+            <NuxtLink
+              v-else
+              :to="pageLink(p)"
+              class="font-en text-[14px] tracking-wider transition-colors relative pb-1"
+              :class="p === currentPage ? 'text-black font-bold after:absolute after:left-0 after:bottom-0 after:w-full after:h-[1.5px] after:bg-black' : 'text-gray-medium hover:text-black'"
+            >{{ p }}</NuxtLink>
+          </li>
+        </ul>
+
         <NuxtLink
           v-if="currentPage < totalPages"
           :to="pageLink(currentPage + 1)"
-          class="font-en text-[12px] px-4 py-2 border border-gray-200 hover:border-black transition-colors"
-        >Next</NuxtLink>
+          class="group inline-flex items-center gap-1.5 font-en text-[12px] tracking-widest uppercase hover:text-gray-medium transition-colors"
+        >
+          Next <span class="transition-transform group-hover:translate-x-1">→</span>
+        </NuxtLink>
       </nav>
     </div>
   </div>
@@ -84,8 +93,9 @@ const props = defineProps({
   perPage:   { type: Number, default: 8 },
   // 指定するとページネーション有効（例 '/news'）
   pageBase:  { type: String, default: '' },
-  // サイドバーでハイライトするタグ
-  activeTag: { type: String, default: '' }
+  // サイドバーでハイライトするタグ・年
+  activeTag:  { type: String, default: '' },
+  activeYear: { type: String, default: '' }
 })
 
 const { newsItems, paginate } = useNews()
@@ -105,6 +115,21 @@ const paged = computed(() =>
 const displayed = computed(() => paged.value.items)
 const totalPages = computed(() => paged.value.totalPages)
 const currentPage = computed(() => paged.value.page)
+
+// 本家風：先頭・末尾・現在地周辺を表示し、間を … で省略
+const pageList = computed(() => {
+  const total = totalPages.value
+  const cur = currentPage.value
+  if (total <= 7) return Array.from({ length: total }, (_, i) => i + 1)
+  const out = [1]
+  const start = Math.max(2, cur - 1)
+  const end = Math.min(total - 1, cur + 1)
+  if (start > 2) out.push('dots')
+  for (let p = start; p <= end; p++) out.push(p)
+  if (end < total - 1) out.push('dots')
+  out.push(total)
+  return out
+})
 
 const pageLink = (n) => (n === 1 ? props.pageBase : `${props.pageBase}/page/${n}`)
 </script>
