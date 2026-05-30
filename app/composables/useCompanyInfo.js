@@ -12,7 +12,9 @@ export const useCompanyInfo = () => {
     revenue:  '連結：84,841百万円（2025年8月期）',
     groupCompanies:    'バリュエンスジャパン株式会社 / Valuence Japan Inc.\nALLU Hong Kong Limited\nバリュエンステクノロジーズ株式会社 / Valuence Technologies Inc.\nバリュエンスベンチャーズ株式会社 / Valuence Ventures Inc.',
     affiliates:        '株式会社南葛SC',
-    mainBanks:         '株式会社三菱UFJ銀行\n株式会社三井住友銀行\n株式会社みずほ銀行\n株式会社りそな銀行'
+    mainBanks:         '株式会社三菱UFJ銀行\n株式会社三井住友銀行\n株式会社みずほ銀行\n株式会社りそな銀行',
+    artGallery:        { label: 'VALON BY VALUENCE', url: 'https://www.valon-by-valuence.com/' },
+    url:               'https://www.valuence.inc/'
   }
 
   const offices = [

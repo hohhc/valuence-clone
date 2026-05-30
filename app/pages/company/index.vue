@@ -2,120 +2,158 @@
   <div>
     <PageHero
       title="Company"
-      subtitle="企業情報"
+      subtitle="循環をデザインする、企業であること。"
+      image="https://www.valuence.inc/wp-content/themes/valuence/assets/images/kv_18.jpg"
       :breadcrumb="[{ label: 'Company' }]"
     />
 
-    <!-- 会社概要 -->
+    <CompanyNav />
+
+    <!-- 会社情報 -->
     <PageSection id="holding" bg="white">
-      <SectionHeading en="Corporate" ja="会社概要" />
-
-      <dl class="border-t border-gray-200">
-        <div
-          v-for="row in corporateRows"
-          :key="row.label"
-          v-reveal
-          class="flex flex-col md:flex-row border-b border-gray-200 py-5 md:py-6"
-        >
-          <dt class="font-ja text-[13px] md:text-[14px] font-bold text-gray-dark md:w-1/4 shrink-0 mb-2 md:mb-0">
-            {{ row.label }}
-          </dt>
-          <dd class="font-ja text-[13px] md:text-[14px] leading-[1.9] text-gray-medium md:w-3/4">
-            <template v-for="(line, i) in row.lines" :key="i">
-              {{ line }}<br v-if="i < row.lines.length - 1" />
-            </template>
-          </dd>
+      <div class="flex flex-col lg:flex-row gap-10 lg:gap-16">
+        <div class="lg:w-1/4 shrink-0">
+          <StackedHeading en="Corporate Information" ja="会社情報" />
         </div>
-      </dl>
 
-      <!-- オフィス -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 md:mt-16">
-        <div
-          v-for="office in offices"
-          :key="office.key"
-          v-reveal
-          class="border border-gray-200 p-6 md:p-8"
-        >
-          <h3 class="font-ja text-[15px] font-bold mb-3">{{ office.label }}</h3>
-          <p class="font-ja text-[12px] md:text-[13px] leading-[1.9] text-gray-medium">{{ office.address }}</p>
-          <p v-if="office.tel" class="font-en text-[12px] text-gray-medium mt-2">TEL：{{ office.tel }}</p>
+        <div class="lg:w-3/4">
+          <dl class="border-t border-gray-200">
+            <div
+              v-for="row in corporateRows"
+              :key="row.label"
+              class="flex flex-col md:flex-row border-b border-gray-200 py-5 md:py-6"
+            >
+              <dt class="font-ja text-[13px] md:text-[14px] font-bold text-gray-dark md:w-1/4 shrink-0 mb-2 md:mb-0">
+                {{ row.label }}
+              </dt>
+              <dd class="font-ja text-[13px] md:text-[14px] leading-[1.95] text-gray-medium md:w-3/4">
+                <a v-if="row.link" :href="row.link.href" target="_blank" rel="noopener" class="text-[#1f7a4d] underline underline-offset-2 hover:opacity-70 transition-opacity break-all">
+                  {{ row.link.text }}
+                </a>
+                <template v-else>
+                  <template v-for="(line, i) in row.lines" :key="i">
+                    {{ line }}<br v-if="i < row.lines.length - 1" />
+                  </template>
+                </template>
+              </dd>
+            </div>
+          </dl>
         </div>
       </div>
     </PageSection>
 
     <!-- CEO -->
-    <PageSection id="ceo" bg="gray">
-      <SectionHeading en="CEO" ja="代表者メッセージ" />
-
-      <div class="flex flex-col md:flex-row gap-10 md:gap-16 items-start">
-        <div v-reveal class="w-full md:w-[38%]">
-          <div class="aspect-[3/4] bg-gray-200 overflow-hidden">
-            <img
-              src="https://www.valuence.inc/wp-content/themes/valuence/assets/images/img_58.jpg"
-              alt="嵜本 晋輔"
-              class="w-full h-full object-cover"
-              loading="lazy"
-            />
+    <PageSection id="ceo" bg="black" spacing="none">
+      <div class="py-0">
+        <div class="flex flex-col md:flex-row items-stretch gap-0 md:gap-0 -mx-6 md:-mx-12 lg:-mx-20">
+          <div v-reveal class="w-full md:w-1/2">
+            <div class="aspect-[4/5] md:aspect-auto md:h-full overflow-hidden">
+              <img :src="ceoProfile.image" :alt="ceoProfile.jaName" class="w-full h-full object-cover" loading="lazy" />
+            </div>
           </div>
-          <p class="font-ja text-[18px] font-bold mt-5">{{ ceo.jaName }}</p>
-          <p class="font-en text-[12px] text-gray-medium tracking-wider">{{ ceo.enName }}</p>
-          <p class="font-ja text-[12px] text-gray-medium mt-1">{{ ceo.role }}</p>
-        </div>
 
-        <div v-reveal="150" class="w-full md:w-[62%]">
-          <h3 class="font-ja text-[20px] md:text-[26px] font-bold leading-[1.6] mb-6 md:mb-8">
-            {{ purpose.headline }}
-          </h3>
-          <p class="font-ja text-[13px] md:text-[15px] leading-[2.1] text-gray-medium mb-6">
-            {{ purpose.body }}
-          </p>
-          <ul class="border-t border-gray-300 mt-8 pt-6 space-y-1.5">
-            <li
-              v-for="(line, i) in ceo.bio"
-              :key="i"
-              class="font-ja text-[12px] md:text-[13px] leading-[1.8] text-gray-medium"
-            >
-              {{ line }}
-            </li>
-          </ul>
+          <div class="w-full md:w-1/2 flex items-center">
+            <div v-reveal="150" class="px-6 md:px-12 lg:px-20 py-16 md:py-24">
+              <p class="font-en text-[clamp(1.75rem,3.5vw,2.75rem)] font-bold leading-[1.2] tracking-tight mb-8 md:mb-10">
+                <span class="block">Shinsuke</span>
+                <span class="block">Sakimoto</span>
+                <span class="block text-gray-400">Profile</span>
+              </p>
+              <a :href="ceoProfile.link" target="_blank" rel="noopener" class="group block">
+                <p class="font-en text-[15px] md:text-[18px] leading-[1.6] mb-3">{{ ceoProfile.enTagline }}</p>
+                <p class="font-ja text-[13px] md:text-[15px] text-white/70 mb-10">{{ ceoProfile.jaTagline }}</p>
+                <span class="inline-flex items-center gap-4 border-b border-white pb-1 group-hover:border-white/50 transition-colors">
+                  <span class="font-en text-[11px] md:text-[12px] font-bold tracking-widest uppercase">View More</span>
+                  <span class="relative inline-block h-[1px] w-8 group-hover:w-12 transition-all duration-300 ease-out-quart">
+                    <span class="absolute inset-0 bg-white"></span>
+                    <span class="absolute right-0 top-0 w-[8px] h-[1px] bg-white origin-right rotate-45"></span>
+                    <span class="absolute right-0 top-0 w-[8px] h-[1px] bg-white origin-right -rotate-45"></span>
+                  </span>
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </PageSection>
 
     <!-- 役員紹介 -->
     <PageSection id="directors" bg="white">
-      <SectionHeading en="Directors" ja="役員紹介" />
+      <StackedHeading en="Directors" ja="役員紹介" />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-x-10 md:gap-x-16 gap-y-12 md:gap-y-14">
-        <article
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-5 md:gap-x-8 gap-y-10 md:gap-y-14">
+        <button
           v-for="director in directors"
           :key="director.enName"
           v-reveal
-          class="border-t border-black pt-6"
+          type="button"
+          class="group text-left"
+          @click="openDirector(director)"
         >
-          <div class="flex items-baseline justify-between gap-4 mb-4">
-            <div>
-              <h3 class="font-ja text-[18px] md:text-[20px] font-bold">{{ director.jaName }}</h3>
-              <p class="font-en text-[11px] md:text-[12px] text-gray-medium tracking-wider mt-1">{{ director.enName }}</p>
-            </div>
-            <span class="font-ja text-[11px] md:text-[12px] text-gray-medium text-right shrink-0">{{ director.role }}</span>
+          <div class="aspect-[3/4] overflow-hidden bg-gray-100 mb-4">
+            <img
+              :src="director.photo"
+              :alt="director.jaName"
+              loading="lazy"
+              class="w-full h-full object-cover object-top grayscale-[15%] transition-all duration-700 ease-out-quart group-hover:scale-[1.04] group-hover:grayscale-0"
+              @error="onPhotoError"
+            />
           </div>
-          <ul class="space-y-1">
-            <li
-              v-for="(line, i) in director.bio"
-              :key="i"
-              class="font-ja text-[11px] md:text-[12px] leading-[1.8] text-gray-400"
-            >
-              {{ line }}
-            </li>
-          </ul>
-        </article>
+          <p class="font-ja text-[11px] md:text-[12px] text-gray-medium mb-1">{{ director.role }}</p>
+          <h3 class="font-ja text-[15px] md:text-[17px] font-bold leading-tight">{{ director.jaName }}</h3>
+          <p class="font-en text-[10px] md:text-[11px] text-gray-medium tracking-wider mt-0.5">{{ director.enName }}</p>
+        </button>
       </div>
     </PageSection>
 
+    <!-- 役員モーダル -->
+    <Teleport to="body">
+      <Transition name="modal-fade">
+        <div
+          v-if="activeDirector"
+          class="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8"
+          @click.self="closeDirector"
+        >
+          <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+          <div class="relative bg-white w-full max-w-3xl max-h-[88vh] overflow-y-auto">
+            <button
+              type="button"
+              aria-label="閉じる"
+              class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center text-gray-medium hover:text-black transition-colors"
+              @click="closeDirector"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><line x1="5" y1="5" x2="19" y2="19" /><line x1="19" y1="5" x2="5" y2="19" /></svg>
+            </button>
+
+            <div class="flex flex-col md:flex-row gap-0">
+              <div class="md:w-2/5 shrink-0">
+                <div class="aspect-[3/4] bg-gray-100 overflow-hidden">
+                  <img :src="activeDirector.photo" :alt="activeDirector.jaName" class="w-full h-full object-cover object-top" @error="onPhotoError" />
+                </div>
+              </div>
+              <div class="md:w-3/5 p-7 md:p-10">
+                <p class="font-ja text-[12px] text-gray-medium mb-2">{{ activeDirector.role }}</p>
+                <h3 class="font-ja text-[22px] md:text-[26px] font-bold leading-tight">{{ activeDirector.jaName }}</h3>
+                <p class="font-en text-[12px] text-gray-medium tracking-wider mt-1 mb-6">{{ activeDirector.enName }}</p>
+                <ul class="space-y-2 border-t border-gray-200 pt-5">
+                  <li
+                    v-for="(line, i) in activeDirector.bio"
+                    :key="i"
+                    class="font-ja text-[11px] md:text-[12.5px] leading-[1.8] text-gray-medium"
+                  >
+                    {{ line }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </Transition>
+    </Teleport>
+
     <!-- 沿革 -->
     <PageSection id="history" bg="gray">
-      <SectionHeading en="History" ja="沿革" />
+      <StackedHeading en="History" ja="沿革" />
 
       <div class="border-l border-gray-300 ml-2 md:ml-4">
         <div
@@ -150,7 +188,7 @@
 
     <!-- Group -->
     <PageSection id="group" bg="gray">
-      <SectionHeading en="Group" ja="グループ会社" />
+      <StackedHeading en="Group" ja="グループ会社" />
 
       <div class="flex flex-col gap-8 md:gap-10">
         <article
@@ -194,26 +232,55 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
 const { corporate, offices } = useCompanyInfo()
-const { directors } = useDirectors()
+const { directors, ceoProfile } = useDirectors()
 const { history } = useHistory()
 const { groups } = useGroups()
-const { purpose } = usePhilosophy()
 
-const ceo = directors[0]
+const officeRow = (key) => {
+  const o = offices.find((x) => x.key === key)
+  if (!o) return null
+  return { label: o.label, lines: o.tel ? [o.address, `TEL：${o.tel}`] : [o.address] }
+}
 
 const corporateRows = [
-  { label: '商号',         lines: corporate.name.split('／') },
+  { label: '社名',         lines: [corporate.name] },
   { label: '設立',         lines: [corporate.founded] },
-  { label: '代表者',       lines: [corporate.ceo] },
+  { label: '代表取締役',   lines: [corporate.ceo] },
   { label: '事業内容',     lines: [corporate.business] },
+  officeRow('tokyo'),
+  officeRow('samezu'),
+  officeRow('osaka'),
+  { label: 'アートギャラリー', link: { text: corporate.artGallery.label, href: corporate.artGallery.url } },
+  { label: 'URL',          link: { text: corporate.url, href: corporate.url } },
   { label: '資本金',       lines: [corporate.capital] },
   { label: '従業員数',     lines: [corporate.employees] },
   { label: '売上高',       lines: [corporate.revenue] },
   { label: 'グループ会社', lines: corporate.groupCompanies.split('\n') },
   { label: '関連会社',     lines: [corporate.affiliates] },
   { label: '主要取引銀行', lines: corporate.mainBanks.split('\n') }
-]
+].filter(Boolean)
+
+// 役員モーダル
+const activeDirector = ref(null)
+const openDirector = (d) => { activeDirector.value = d }
+const closeDirector = () => { activeDirector.value = null }
+
+const PLACEHOLDER = 'https://www.valuence.inc/wp-content/themes/valuence/assets/images/img_58.jpg'
+const onPhotoError = (e) => { e.target.src = PLACEHOLDER }
+
+const onKey = (e) => { if (e.key === 'Escape') closeDirector() }
+onMounted(() => window.addEventListener('keydown', onKey))
+onUnmounted(() => window.removeEventListener('keydown', onKey))
 
 useHead({ title: 'Company | Valuence Holdings' })
 </script>
+
+<style scoped>
+.modal-fade-enter-active,
+.modal-fade-leave-active { transition: opacity 0.3s ease; }
+.modal-fade-enter-from,
+.modal-fade-leave-to { opacity: 0; }
+</style>

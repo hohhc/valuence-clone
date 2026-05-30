@@ -3,7 +3,20 @@
  * 10名構成
  */
 export const useDirectors = () => {
-  const directors = [
+  const PHOTO = 'https://www.valuence.inc/wp-content/uploads/2025/05'
+
+  // CEO プロフィール誘導カード（公式 #ceo セクション）
+  const ceoProfile = {
+    jaName: '嵜本 晋輔',
+    enName: 'Shinsuke Sakimoto',
+    profileTitle: 'Shinsuke Sakimoto Profile',
+    enTagline: 'A world where we can focus on what really matters',
+    jaTagline: '大切なことにフォーカス出来る世界を',
+    image: 'https://www.valuence.inc/wp-content/themes/valuence/assets/images/kv_19.jpg',
+    link: 'https://www.valuence.inc/ceo/'
+  }
+
+  const rawDirectors = [
     {
       jaName: '嵜本 晋輔',
       enName: 'Shinsuke Sakimoto',
@@ -100,5 +113,11 @@ export const useDirectors = () => {
     }
   ]
 
-  return { directors }
+  // enName から写真URL（{first_last}.webp）を導出して付与
+  const directors = rawDirectors.map((d) => ({
+    ...d,
+    photo: `${PHOTO}/${d.enName.toLowerCase().replace(/\s+/g, '_')}.webp`
+  }))
+
+  return { directors, ceoProfile }
 }
