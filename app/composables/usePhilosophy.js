@@ -24,10 +24,38 @@ export const usePhilosophy = () => {
       '私たちは、循環型社会における重要な取組みの一つであるリユースを事業の中核に据え、持続可能な世界の実現を目指しております。'
   }
 
-  // #valueProgress : 理念は3つから構成される
+  // #valueDesignMap
+  const valueDesignMap = {
+    subtitle: '人間中心のValue Design Companyから、\n地球規模のCircular Design Companyへ',
+    mainLabels: [
+      { sub: 'Purpose', en1: 'Circular Design', en2: 'for the Earth and Us' },
+      { sub: 'Mission', ja: '大切なことにフォーカスして生きる人を増やす' },
+      { sub: 'Core Value', en1: 'Value Design', en2: 'for Us' }
+    ],
+    circles: ['Earth', 'Local', 'Community', 'Family', 'Human'],
+    svgTitle: `${IMG}/philosophy-tx_01.svg`,
+    svgTitleSp: `${IMG}/philosophy-tx_01_sp.svg`
+  }
+
+  // Value Design for Us / Value Mind SVG 見出し
+  const valueDesignForUs = {
+    svgTitle: `${IMG}/philosophy-tx_01.svg`,
+    svgTitleSp: `${IMG}/philosophy-tx_01_sp.svg`
+  }
+
+  const valueMindIntro = {
+    svgTitle: `${IMG}/philosophy-tx_02.svg`,
+    lead: '私たちの、行動指針',
+    summary:
+      '想いは、行動となり、価値をつくる。お客さまの人生はもちろん、私たちの人生に新しい価値を生み出すために大切な、５つのマインド。'
+  }
+
+  // #valueProgress 縦線画像
   const pillars = {
     lead:
       'Valuenceグループの企業理念は、パーパス、ミッション、コアバリューの大切な３つから構成されています。',
+    lineImage: `${IMG}/philosophy-line@2x.png`,
+    lineImageSp: `${IMG}/philosophy-line_sp.png`,
     items: [
       { en: 'Core Value', ja: 'コアバリュー', sphere: '現状', desc: 'お客さまに提供する、私たちの核となる価値や信念。' },
       { en: 'Mission',    ja: 'ミッション',   sphere: '',     desc: '事業を通じて目指す、私たちの中長期的な使命。' },
@@ -68,25 +96,8 @@ export const usePhilosophy = () => {
     image: `${IMG}/philosophy-img_06.jpg`
   }
 
-  // #valueDesignMap
-  const valueDesignMap = {
-    subtitle: '人間中心のValue Design Companyから、\n地球規模のCircular Design Companyへ',
-    sideLabels: [
-      { sub: 'Purpose',    main: 'Circular Design', main2: 'for the Earth and Us' },
-      { sub: 'Mission',    main: '大切なことにフォーカスして生きる人を増やす' },
-      { sub: 'Core Value', main: 'Value Design', main2: 'for Us' }
-    ],
-    circles: ['Earth', 'Local', 'Community', 'Family', 'Human']
-  }
 
-  // #valueMind
-  const valueMind = {
-    lead: '私たちの、行動指針',
-    summary:
-      '想いは、行動となり、価値をつくる。お客さまの人生はもちろん、私たちの人生に新しい価値を生み出すために大切な、５つのマインド。'
-  }
-
-  // Core Value 5本柱（Value Design Map / 一覧用）
+  // Core Value 5本柱
   const coreValues = [
     { id: 'forSociety',  en: 'For Society',  ja: '豊かさを、繋げよう。' },
     { id: 'forBusiness', en: 'For Business', ja: 'プロの、誇りを。' },
@@ -98,36 +109,45 @@ export const usePhilosophy = () => {
   // #valueMind photoSet（5マインド・ホバーで和文）
   const valueMinds = [
     {
-      id: 'forSociety', label: 'For Society', heading: '豊かさを、繋げよう。',
+      id: 'forSociety', style: '05', label: 'For Society', heading: '豊かさを、繋げよう。',
       en: 'Weave the strands of prosperity throughout the world.',
+      enHtml: 'Weave the strands of prosperity <br>throughout the world.',
       ja: '私たちの日々の行動で、循環のデザインを実践していこう。',
+      jaHtml: '私たちの日々の行動で、<br>循環のデザインを実践していこう。',
       image: `${IMG}/img_54.jpg`
     },
     {
-      id: 'forBusiness', label: 'For Business', heading: 'プロの、誇りを。',
+      id: 'forBusiness', style: '04', label: 'For Business', heading: 'プロの、誇りを。',
       en: 'Be professional.',
       ja: '徹底的にお客さま目線で寄り添い、失敗を恐れず、目の前の仕事にこだわっていこう。',
+      jaHtml: '徹底的にお客さま目線で寄り添い、<br>失敗を恐れず、<br>目の前の仕事にこだわっていこう。',
       image: `${IMG}/img_53.jpg`
     },
     {
-      id: 'forProgress', label: 'For Progress', heading: '変化を、進化に。',
+      id: 'forProgress', style: '03', label: 'For Progress', heading: '変化を、進化に。',
       en: 'Advance forward with adaptability.',
+      enHtml: 'Advance forward <br>with adaptability.',
       ja: 'いかなる変化も成長の機会と捉え、自らポジティブに向かっていこう。',
+      jaHtml: 'いかなる変化も成長の機会と捉え、<br>自らポジティブに向かっていこう。',
       image: `${IMG}/img_52.jpg`
     },
     {
-      id: 'forTeam', label: 'For Team', heading: '思いやる、共に創る。',
+      id: 'forTeam', style: '02', label: 'For Team', heading: '思いやる、共に創る。',
       en: 'Think of others, design coherently.',
+      enHtml: 'Think of others,<br>design coherently.',
       ja: '多様な個性同士、謙虚に学び合い、常識にとらわれない価値を創造しよう。',
+      jaHtml: '多様な個性同士、謙虚に学び合い、<br>常識にとらわれない価値を創造しよう。',
       image: `${IMG}/img_51.jpg`
     },
     {
-      id: 'forMe', label: 'For Me', heading: '好きを、究めよ。',
+      id: 'forMe', style: '01', label: 'For Me', heading: '好きを、究めよ。',
       en: 'Pursue your true purpose.',
+      enHtml: 'Pursue your<br>true purpose.',
       ja: '仕事もプライベートも垣根なく。好きを追求し、自らが主体的に心豊かに生きる人であろう。',
+      jaHtml: '仕事もプライベートも垣根なく。好きを追求し、<br>自らが主体的に心豊かに生きる人であろう。',
       image: `${IMG}/img_50.jpg`
     }
   ]
 
-  return { nav, concept, pillars, purpose, mission, coreValue, valueDesignMap, valueMind, coreValues, valueMinds }
+  return { nav, concept, pillars, purpose, mission, coreValue, valueDesignMap, valueDesignForUs, valueMindIntro, coreValues, valueMinds }
 }
